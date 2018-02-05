@@ -1,0 +1,27 @@
+{
+  "name": "kibana-datasweet-formula",
+  "version": "0.0.1",
+  "description": "This Kibana plugin allows calculated metrics on any standard kibana visualizations.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://tcharlot-datasweet@github.com/datasweet-fr/kibana-datasweet-formula.git"
+  },
+  "keywords": [
+    "datasweet",
+    "kibana",
+    "plugin",
+    "formula",
+    "calculated",
+    "metrics"
+  ],
+  "author": "Thomas Charlot <thomas.charlot@datasweet.fr>",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/datasweet-fr/kibana-datasweet-formula/issues"
+  },
+  "homepage": "https://github.com/datasweet-fr/kibana-datasweet-formula#readme"
+}
