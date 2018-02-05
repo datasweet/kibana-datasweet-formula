@@ -1,10 +1,19 @@
 {
-  "name": "kibana-datasweet-formula",
+  "name": "datasweet_formula",
   "version": "0.0.1",
   "description": "This Kibana plugin allows calculated metrics on any standard kibana visualizations.",
   "main": "index.js",
+  "kibana": {
+    "version": "kibana"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "eslint **/*.js",
+    "start": "plugin-helpers start",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "test:server": "plugin-helpers test:server",
+    "test:browser": "plugin-helpers test:browser",
+    "build": "plugin-helpers build",
+    "postinstall": "plugin-helpers postinstall"
   },
   "repository": {
     "type": "git",
@@ -23,5 +32,13 @@
   "bugs": {
     "url": "https://github.com/datasweet-fr/kibana-datasweet-formula/issues"
   },
-  "homepage": "https://github.com/datasweet-fr/kibana-datasweet-formula#readme"
+  "homepage": "https://github.com/datasweet-fr/kibana-datasweet-formula#readme",
+  "devDependencies": {
+    "@elastic/eslint-config-kibana": "0.0.2",
+    "@elastic/plugin-helpers": "^6.0.0",
+    "babel-eslint": "4.1.8",
+    "eslint": "1.10.3",
+    "eslint-plugin-mocha": "1.1.0",
+    "expect.js": "^0.3.1"
+  }
 }
