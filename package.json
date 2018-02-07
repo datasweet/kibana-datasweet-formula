@@ -1,6 +1,6 @@
 {
   "name": "datasweet_formula",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "This Kibana plugin allows calculated metrics on any standard kibana visualizations.",
   "main": "index.js",
   "kibana": {
@@ -9,7 +9,6 @@
   "scripts": {
     "lint": "eslint **/*.js",
     "start": "plugin-helpers start",
-    "test": "echo \"Error: no test specified\" && exit 1",
     "test:server": "plugin-helpers test:server",
     "test:browser": "plugin-helpers test:browser",
     "build": "plugin-helpers build",
@@ -40,5 +39,9 @@
     "eslint": "1.10.3",
     "eslint-plugin-mocha": "1.1.0",
     "expect.js": "^0.3.1"
+  },
+  "dependencies": {
+    "expr-eval": "^1.2.1",
+    "lodash": "^3.10.1"
   }
 }

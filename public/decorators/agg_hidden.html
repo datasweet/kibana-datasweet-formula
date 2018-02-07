@@ -1,0 +1,28 @@
+    <!-- hide aggregation -->
+    <button
+      ng-if="!agg.hidden && canRemove(agg)"
+      ng-disabled="!canHide(agg)"
+      ng-click="agg.hidden = true"
+      ng-show="agg.schema.name === 'metric'"
+      aria-label="Hide aggregation"
+      tooltip="Hide aggregation"
+      tooltip-append-to-body="true"
+      type="button"
+      class="kuiButton kuiButton--basic kuiButton--small">
+      <i aria-hidden="true" class="fa fa-eye-slash"></i>
+    </button>
+
+    <!-- view aggregation -->
+    <button
+      ng-if="agg.hidden"
+      ng-click="agg.hidden = false"
+      ng-show="agg.schema.name === 'metric'"
+      aria-label="View aggregation"
+      tooltip="View aggregation"
+      tooltip-append-to-body="true"
+      type="button"
+      class="kuiButton kuiButton--warning kuiButton--small">
+      <i aria-hidden="true" class="fa fa-eye"></i>
+    </button>
+
+    <!-- disable aggregation -->

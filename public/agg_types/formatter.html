@@ -1,0 +1,9 @@
+<div class="form-group">
+    <label>Formatter</label>
+    <select
+        ng-model="agg.params.formatter"
+        ng-init="agg.params.formatter = agg.params.formatter || 'number'"
+        ng-options="format.id as format.title for format in aggParam.getFormatters()"
+        class="form-control">
+    </select>
+</div>
