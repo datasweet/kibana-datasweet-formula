@@ -1,0 +1,37 @@
+site_name: Datasweet Formula
+site_url: http://www.datasweet.fr/
+site_description: Datasweet Formula is a real time calculated metric plugin to Kibana
+site_author: Datasweet
+repo_url: https://github.com/datasweet-fr/kibana-datasweet-formula
+copyright: Copyright &copy 2018 <a href="http://www.datasweet.fr">Datasweet</a>.
+google_analytics: 
+  - 'UA-90306633-1'
+  - 'auto'
+theme: 
+  name: material
+  custom_dir: mkdocs-theme
+  favicon: img/favicon.ico
+  logo: img/datasweet-icon.svg
+  palette:
+    primary: 'pink'
+    accent: 'pink'
+pages:
+  - Home: index.md
+  - About: about.md
+  - Installation: installation.md
+  - Functions List:
+    - functions/avg.md
+    - functions/count.md
+    - functions/cusum.md
+    - functions/derivative.md
+    - functions/filter.md
+    - functions/if.md
+    - functions/ifnan.md
+    - functions/max.md
+    - functions/min.md
+    - functions/mvavg.md
+    - functions/next.md
+    - functions/prev.md
+    - functions/sum.md
+  - License: license.md
+

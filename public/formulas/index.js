@@ -1,5 +1,5 @@
 import avg from './avg';
-import coalesce from './coalesce';
+import ifnan from './ifnan';
 import count from './count';
 import cusum from './cusum';
 import derivative from './derivative';
@@ -14,7 +14,7 @@ import sum from './sum';
 
 export {
     avg,
-    coalesce,
+    ifnan,
     count,
     cusum,
     derivative,
