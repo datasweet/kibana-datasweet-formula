@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 
+rm -Rf releases
 mkdir -p releases
 
 function build {
@@ -11,6 +12,7 @@ function build {
     done
 }
 
+build 6.2.1
 build 6.2.0
 
 build 6.1.3

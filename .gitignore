@@ -15,6 +15,7 @@ pids
 build/
 releases/
 site/
+bin/
 
 # Dependency directories
 node_modules/
