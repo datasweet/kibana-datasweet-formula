@@ -20,6 +20,7 @@ pages:
   - About: about.md
   - Installation: installation.md
   - Functions List:
+    - functions/basics.md
     - functions/avg.md
     - functions/count.md
     - functions/cusum.md

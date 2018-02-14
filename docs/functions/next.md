@@ -1,6 +1,6 @@
 # Function next
 
-Shift to right a serie.
+Shift a serie to right.
 
 ## Syntax
 ```

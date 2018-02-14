@@ -8,4 +8,4 @@ Copy the last installation url for your version of Kibana from the [repository r
 This plugin is supported by : 
 
 * Kibana 6.x
-* Kibana >= 5.5
+* Kibana >= 5.6

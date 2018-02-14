@@ -1,6 +1,6 @@
 # Function prev
 
-Shift to left a serie.
+Shift a serie to left.
 
 ## Syntax
 ```

@@ -1,6 +1,6 @@
 # Function filter
 
-Returns a null value for a filter value. 
+Filter out values matching the condition in the serie, by returning a null value.
 
 ## Syntax
 ```

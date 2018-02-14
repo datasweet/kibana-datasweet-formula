@@ -3,7 +3,7 @@
 [![datasweet-logo](docs/img/datasweet.png)](http://www.datasweet.fr)
 
 Hi all !
-We are Datasweet, a french startup providing full service (big) data solutions. We tweaked Kibana to fit our needs. We are happy to release Datasweet Formula, a real time calculated metric plugin, that workds on any standard Kibana vizualisation. Check out what it can do in the [documentation.](http://www.datasweet.fr/datasweet-formula.html)
+We are Datasweet, a french startup providing full service (big) data solutions. We tweaked Kibana to fit our needs. We are happy to release Datasweet Formula, a real time calculated metric plugin, that works on any standard Kibana vizualisation. Check out what it can do in the [documentation.](http://www.datasweet.fr/datasweet-formula/)
 
 # Example : simple ratio calculation
 
@@ -12,17 +12,17 @@ We are Datasweet, a french startup providing full service (big) data solutions. 
 # Installation
 This plugin is supported by : 
  - Kibana 6.x
- - Kibana >= 5.5
+ - Kibana 5.6
 
 Copy the last installation url for your version of Kibana from the [repository releases](https://github.com/datasweet-fr/kibana-datasweet-formula/releases/latest).
 ```
 ./bin/kibana-plugin install  https://github.com/datasweet-fr/kibana-datasweet-formula/releases/download/version_name/datasweet_formula-X.X.X_kibana-major.minor.patch.zip
 ```
 # Features
-Check out what it can do in the [documentation.](http://www.datasweet.fr/datasweet-formula.html)
+Check out what it can do in the [documentation.](http://www.datasweet.fr/datasweet-formula/)
 
 # Questions ? problems ? suggestions ?
-If you've found a bug or want to request a feature, please create a [GitHub Issue](https://github.com/datasweet-fr/kibana-datasweet-formula/issues/new).
+If you find a bug or want to request a feature, please create a [GitHub Issue](https://github.com/datasweet-fr/kibana-datasweet-formula/issues/new).
 
 # Credits
 Datasweet Formula is built on [Javascript Expression Evaluator](https://silentmatt.com/javascript-expression-evaluator/) by Silent Matt.
