@@ -57,7 +57,12 @@ function test {
   curl -H 'Content-Type: application/json' -H 'kbn-name: kibana' -H "kbn-version: $1" -XPOST 'localhost:5601/api/kibana/settings/defaultIndex' --data `printf '{"value":"%s"}' $IPID`
   curl -H 'Content-Type: application/json' -H 'kbn-name: kibana' -H "kbn-version: $1" -XPUT "localhost:5601/api/saved_objects/index-pattern/$IPID" --data-binary @tests/index-pattern-2.json
 
-  VIZ=$(cat tests/viz.json)
+  if [[ $1 =~ ^5* ]]; then
+    VIZ=$(cat tests/viz-5x.json)
+  elif [[ $1 =~ ^6* ]]; then
+    VIZ=$(cat tests/viz-6x.json)
+  fi
+
   VIZ=`echo ${VIZ/formula-index-pattern/$IPID}`
   VIZ=`echo ${VIZ//formula-kbn-version/v$1}`
   IDVIZ=`curl -H 'Content-Type: application/json' -H 'kbn-name: kibana' -H "kbn-version: $1" -XPOST 'localhost:5601/api/saved_objects/visualization?overwrite=true' --data "$VIZ" | jq .id | tr -d '"'`
@@ -68,32 +73,5 @@ function test {
   screencapture -x releases/datasweet_formula-${PACKAGE_VERSION}_kibana-$1.jpg
 }
 
-
-test 6.2.1
-test 6.2.0
-
-test 6.1.3
-test 6.1.2
-test 6.1.1
-test 6.1.0
-
-test 6.0.1
-test 6.0.0
-
-test 5.6.7
-test 5.6.6
-test 5.6.5
-test 5.6.4
-test 5.6.3
-test 5.6.2
-test 5.6.1
-test 5.6.0
-
-test 5.5.3
-test 5.5.2
-test 5.5.1
-test 5.5.0
-
-# test $1
 stop
 echo "Done !\n"
