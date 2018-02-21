@@ -3,7 +3,7 @@
 [![datasweet-logo](docs/img/datasweet.png)](http://www.datasweet.fr)
 
 Hi all !
-We are Datasweet, a french startup providing full service (big) data solutions. We tweaked Kibana to fit our needs. We are happy to release Datasweet Formula, a real time calculated metric plugin, that works on any standard Kibana vizualisation. Check out what it can do in the [documentation.](http://www.datasweet.fr/datasweet-formula/)
+We are Datasweet, a french startup providing full service (big) data solutions. We tweaked Kibana to fit our needs. We are happy to release Datasweet Formula, a real time calculated metric plugin, that works on any standard Kibana visualization. Check out what it can do in the [documentation.](http://www.datasweet.fr/datasweet-formula/)
 
 # Example : simple ratio calculation
 

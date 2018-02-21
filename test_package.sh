@@ -71,7 +71,11 @@ function test {
   open "http://localhost:5601/app/kibana#/visualize/edit/$IDVIZ"
   sleep 15
   screencapture -x releases/datasweet_formula-${PACKAGE_VERSION}_kibana-$1.jpg
+  stop
 }
 
-stop
-echo "Done !\n"
+if [ -n "$1" ]; then
+  test $1
+fi
+
+echo "Done !"

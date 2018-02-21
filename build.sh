@@ -1,8 +1,6 @@
 #!/bin/bash
 set -e
 
-source test_package.sh
-
 rm -Rf releases
 mkdir -p releases
 
@@ -12,9 +10,12 @@ function build {
       new=$(echo $old | sed -E "s/(^build)(\/datasweet_formula-.+)\.zip$/releases\2_kibana-$1.zip/")
       mv -v "$old" "$new"
     done
-
-    test $1
 }
+
+if [ -n "$1" ]; then
+  build $1
+fi
+
 
 build 6.2.1
 build 6.2.0

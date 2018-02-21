@@ -1,5 +1,6 @@
 import { reduce } from 'lodash';
 import { uiModules } from  'ui/modules';
+import chrome from 'ui/chrome';
 import { decorateVisAggConfigProvider } from './decorators/agg_config';
 import { decorateAggTypes } from './decorators/agg_types';
 import { decorateTabbedAggResponseWriterProvider } from './decorators/response_writer';
@@ -7,7 +8,12 @@ import hiddenTpl from './decorators/agg_hidden.html';
 import titleTpl from './decorators/agg_title.html';
 
 
-uiModules
+const appId = chrome.getApp().id;
+
+// Only inject decorator on kibana app
+if (appId === 'kibana') {
+
+  uiModules
   .get('datasweet/formula', ['kibana'])
   .run((Private) => {
     decorateVisAggConfigProvider(Private);
@@ -15,7 +21,7 @@ uiModules
     decorateTabbedAggResponseWriterProvider(Private);
   });
 
-uiModules
+  uiModules
   .get('app/visualize')
   .config(($provide) => {
     $provide.decorator('visEditorAggDirective', ($delegate) => {
@@ -48,3 +54,4 @@ uiModules
       return $delegate;
     });
   });
+}

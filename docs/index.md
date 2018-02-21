@@ -1,6 +1,6 @@
 # Datasweet Formula
 
-Datasweet Formula makes it possible to calculate a metric in real time, based on any existing metrics, in a Kibana standard vizualisation. It allows to create pretty much any calculation, from simple ratios to more complex, chained treatments.
+Datasweet Formula makes it possible to calculate a metric in real time, based on any existing metrics, in a Kibana standard visualization. It allows to create pretty much any calculation, from simple ratios to more complex, chained treatments.
 
 ![tutorial-datasweet-formula](img/tutorial-datasweet-formula.gif)
 
