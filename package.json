@@ -24,7 +24,9 @@
     "plugin",
     "formula",
     "calculated",
-    "metrics"
+    "scripted",
+    "metric",
+    "ratio"
   ],
   "author": "Thomas Charlot <thomas.charlot@datasweet.fr>",
   "license": "Apache-2.0",
