@@ -16,7 +16,7 @@ if [ -n "$1" ]; then
   build $1
 fi
 
-
+build 6.2.2
 build 6.2.1
 build 6.2.0
 
