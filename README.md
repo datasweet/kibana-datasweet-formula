@@ -1,4 +1,7 @@
 # Datasweet Formula : a real time calculated metric plugin
+[![Github All Releases](https://img.shields.io/github/downloads/atom/atom/total.svg)](https://github.com/datasweet-fr/kibana-datasweet-formula)
+[![GitHub release](https://img.shields.io/github/release/qubyte/rubidium.svg)](https://github.com/datasweet-fr/kibana-datasweet-formula/)
+[![GitHub stars](https://img.shields.io/github/stars/badges/shields.svg?style=social&logo=github&label=Stars)](https://github.com/datasweet-fr/kibana-datasweet-formula/)
 
 [![datasweet-logo](docs/img/datasweet.png)](http://www.datasweet.fr)
 
