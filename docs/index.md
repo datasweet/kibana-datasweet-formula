@@ -12,6 +12,8 @@ Select the metrics you need as input to your formula, then :
 * You can apply functions to your calculation : `avg(aggX + aggY)`
 * Functions are chainables :  `floor(avg(aggX + aggY))`
 * You can use a previously set formula as input for a new one.
+* Specific standard deviation aggregation : use `aggX_std_upper` or `aggX_std_lower` to get values.
+* Specific percentiles aggregation : use `aggX_PERCENTILEVALUE` to get values and replace float percentile values with '_' ie `aggX_2_3` for the 2.3 percentiles.
 
 ## Credits
 
