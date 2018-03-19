@@ -72,15 +72,14 @@ export function AggResponseFormulaProvider(Private)  {
 
       // Apply
       if (!isEmpty(computed)) {
-        const isRowValue = isObject(table.rows[0]);
+        const isRowValue = isObject(table.rows[0][0]);
         each(table.rows, (row, i) => {
           each(computed, (data, colIndex) => {
             const value = (data.isArray ? data.value[i] || null : data.value);
-            let rv = row[colIndex];
             if (isRowValue) {
-              rv.value = value;
+              row[colIndex].value = value;
             } else {
-              rv = value;
+              row[colIndex] = value;
             }
           });
         });
