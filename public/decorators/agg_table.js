@@ -21,6 +21,7 @@ uiModules
           const table = $scope.table;
 
           // Validations
+          if (!table) return;
           const hasColumns = !!table.columns.length;
           const hasFormulas = !!table.columns.find(c => c.aggConfig.type.name === 'datasweet_formula');
           const isTotalFunctionAllowed = $scope.showTotal && TOTAL_FUNCTIONS_ALLOWED.includes($scope.totalFunc);
