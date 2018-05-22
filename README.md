@@ -29,6 +29,10 @@ If you find a bug or want to request a feature, please create a [GitHub Issue](h
 # Credits
 Datasweet Formula is built on [Javascript Expression Evaluator](https://silentmatt.com/javascript-expression-evaluator/) by Silent Matt.
 
+# Contributors
+[<img src="https://avatars0.githubusercontent.com/u/16384428?s=100&v=4"/><br /><sub><b>Gustavo Matheus</b></sub>](https://github.com/gmatheus)
+
+
 # License
 ```
 This software is licensed under the Apache License, version 2 ("ALv2"), quoted below.
