@@ -6,6 +6,7 @@ import { decorateAggTypes } from './decorators/agg_types';
 import { decorateTabbedAggResponseWriterProvider } from './decorators/response_writer';
 import hiddenTpl from './decorators/agg_hidden.html';
 import titleTpl from './decorators/agg_title.html';
+import './decorators/agg_table'
 
 
 const appId = chrome.getApp().id;
