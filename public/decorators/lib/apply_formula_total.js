@@ -1,4 +1,4 @@
-import { each, get, isEmpty } from 'lodash';
+import { each, find, get, isEmpty } from 'lodash';
 import { FormulaParserProvider } from './formula_parser';
 
 export function TableTotalFormulaProvider(Private)  {
@@ -7,11 +7,14 @@ export function TableTotalFormulaProvider(Private)  {
   const parser = new FormulaParser(true);
   const varPrefix = 'agg';
 
-  function extractSeriesAndFormulas(formattedColumns, cols) {
+  function hasFormulas(cols) {
+    return find(cols, 'aggConfig.type.name', aggTypeFormulaId) !== undefined;
+  }
+
+  function extractSeriesAndFormulas(totals, cols) {
     const res = { series: {}, formulas:[] };
 
-    each(cols, (c, i)=> {
-      const colIndex = i;
+    each(cols, (c, colIndex)=> {
       const key = varPrefix + c.aggConfig.id.replace('.', '_');
 
       // formula ?
@@ -30,7 +33,10 @@ export function TableTotalFormulaProvider(Private)  {
       // series
       else {
         // TODO: analyze all formulas to build dependencies
-        res.series[key] = formattedColumns[colIndex].totalRaw;
+        res.series[key] = {
+          sum: totals[colIndex].sum,
+          avg: totals[colIndex].avg
+        };
       }
     });
 
@@ -42,7 +48,21 @@ export function TableTotalFormulaProvider(Private)  {
     each(datas.formulas, f => {
       let res = null;
       try {
-        res = f.compiled.evaluate(datas.series);
+        const sumSeries = Object.keys(datas.series).reduce((obj, id) => {
+          obj[id] = datas.series[id] && datas.series[id].sum;
+          return obj;
+        }, {});
+
+        const avgSeries = Object.keys(datas.series).reduce((obj, id) => {
+          obj[id] = datas.series[id] && datas.series[id].avg;
+          return obj;
+        }, {});
+
+        res = {
+          sum: f.compiled.evaluate(sumSeries),
+          avg: f.compiled.evaluate(avgSeries)
+        };
+
         computed[f.colIndex] = res;
       } catch (e) {
         res = null;
@@ -53,22 +73,47 @@ export function TableTotalFormulaProvider(Private)  {
     return computed;
   };
 
-  function mutate(formattedColumns, columns) {
-    const datas = extractSeriesAndFormulas(formattedColumns, columns);
+  function applyColumnTotals(table, columns) {
+    table.totals = columns.reduce((arr, col, i) => {
+      const sum = tableRows => tableRows.reduce((prev, curr) => {
+        // some metrics return undefined for some of the values
+        // derivative is an example of this as it returns undefined in the first row
+        if (curr[i].value === undefined) return prev;
+        return prev + curr[i].value;
+      }, 0);
 
-    // Compute and stocks
-    const computed = compute(datas);
+      arr[i] = {
+        sum: sum(table.rows),
+        avg: sum(table.rows) / table.rows.length
+      };
+      return arr;
+    }, []);
+  }
 
-    // Applys
-    if (!isEmpty(computed)) {
-      each(computed, (value, colIndex) => {
-        formattedColumns[colIndex].totalRaw = value;
-        formattedColumns[colIndex].total = formattedColumns[colIndex].formatter(value);
-      });
+  function mutate(table, columns) {
+    if (table.tables) {
+      table.tables.forEach(t => mutate(t, columns));
+    } else {
+      applyColumnTotals(table, columns);
+      const datas = extractSeriesAndFormulas(table.totals, columns);
+
+      // Compute and stocks
+      const computed = compute(datas);
+
+      // Applys
+      if (!isEmpty(computed)) {
+        each(computed, (data, colIndex) => {
+          table.totals[colIndex] = {
+            sum: data.sum,
+            avg: data.avg
+          };
+        });
+      }
     }
   };
 
-  return function apply(formattedColumns, columns) {
-    mutate(formattedColumns, columns);
+  return function apply(columns, resp) {
+    if (columns.length === 0  || resp.length === 0 || !hasFormulas(columns)) return;
+    mutate(resp, columns);
   };
 };
