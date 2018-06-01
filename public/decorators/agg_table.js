@@ -11,7 +11,7 @@ uiModules
       const directive = $delegate[0];
       const controllerName = directive.controller;
 
-      directive.controller = function ($scope, Private) {
+      directive.controller = function ($scope) {
         angular.extend(this, $controller(controllerName, { $scope: $scope }));
 
         // This will run after $scope.$watch('table') from default controller
