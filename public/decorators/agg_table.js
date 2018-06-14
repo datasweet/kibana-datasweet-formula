@@ -1,10 +1,14 @@
+import chrome from 'ui/chrome';
 import { uiModules } from 'ui/modules';
 import { TableTotalFormulaProvider } from './lib/apply_formula_total';
+const appId = chrome.getApp().id;
 
 // Defines the $scope.totalFunc allowed to perform the calculations
 const TOTAL_FUNCTIONS_ALLOWED = ['sum', 'avg'];
 
-uiModules
+// Only inject decorator on kibana app
+if (appId === 'kibana') {
+  uiModules
   .get('kibana')
   .config(($provide) => {
     // Decorates kbnAggTable default directive
@@ -69,3 +73,4 @@ uiModules
       return $delegate;
     });
   });
+}
