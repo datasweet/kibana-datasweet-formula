@@ -12,11 +12,11 @@ import './decorators/agg_table'
 const appId = chrome.getApp().id;
 
 // Only inject decorator on kibana app
-if (appId === 'kibana') {
+if (appId === 'kibana' || appId === 'dashboardViewer') {
 
   uiModules
   .get('datasweet/formula', ['kibana'])
-  .run((Private) => {
+  .run((Private) => {    
     decorateVisAggConfigProvider(Private);
     decorateAggTypes(Private);
     decorateTabbedAggResponseWriterProvider(Private);

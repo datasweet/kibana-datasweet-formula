@@ -1,9 +1,9 @@
 import { isBoolean } from 'lodash';
-import { VisAggConfigProvider } from 'ui/vis/agg_config';
+import * as prov from 'ui/vis/agg_config';
 
 
 export function decorateVisAggConfigProvider(Private) {
-  const AggConfig = Private(VisAggConfigProvider);
+  const AggConfig = prov.AggConfig || Private(prov.VisAggConfigProvider);
 
   Object.defineProperty(AggConfig.prototype, 'hidden', {
     get: function () {

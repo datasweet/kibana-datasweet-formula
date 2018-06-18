@@ -1,10 +1,10 @@
-import { TabbedAggResponseWriterProvider } from 'ui/agg_response/tabify/_response_writer';
+import * as prov from 'ui/agg_response/tabify/_response_writer';
 import { AggResponseHiddenColumnsProvider } from './lib/apply_hidden';
 import { AggResponseFormulaProvider } from './lib/apply_formula';
 import { TableTotalFormulaProvider } from './lib/apply_formula_total';
 
-export function decorateTabbedAggResponseWriterProvider(Private) {
-  const TabbedAggResponseWriter = Private(TabbedAggResponseWriterProvider);
+export function decorateTabbedAggResponseWriterProvider(Private) {  
+  const TabbedAggResponseWriter = prov.TabbedAggResponseWriter || Private(prov.TabbedAggResponseWriterProvider);
   const applyFormulas = Private(AggResponseFormulaProvider);
   const applyFormulaTotal = Private(TableTotalFormulaProvider);
   const applyHiddenCols = Private(AggResponseHiddenColumnsProvider);
