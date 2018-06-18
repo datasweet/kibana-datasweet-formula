@@ -6,6 +6,7 @@ export function AggResponseHiddenColumnsProvider() {
       table.tables.forEach(t => mutate(t, hiddenCols));
     } else {
       table.columns = reject(table.columns, (c, i) => includes(hiddenCols, i));
+      table.totals = reject(table.totals, (c, i) => includes(hiddenCols, i));
       table.rows = map(table.rows, row => reject(row, (r, i) => includes(hiddenCols, i)));
     }
   };
