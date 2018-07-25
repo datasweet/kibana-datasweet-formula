@@ -1,6 +1,6 @@
 # Datasweet Formula : a real time calculated metric plugin
-[![GitHub stars](https://img.shields.io/github/stars/datasweet-fr/kibana-datasweet-formula.svg)](https://github.com/datasweet-fr/kibana-datasweet-formula/stargazers)
-[![GitHub license](https://img.shields.io/github/license/datasweet-fr/kibana-datasweet-formula.svg)](https://github.com/datasweet-fr/kibana-datasweet-formula/blob/master/LICENSE)
+[![GitHub stars](https://img.shields.io/github/stars/datasweet/kibana-datasweet-formula.svg)](https://github.com/datasweet/kibana-datasweet-formula/stargazers)
+[![GitHub license](https://img.shields.io/github/license/datasweet/kibana-datasweet-formula.svg)](https://github.com/datasweet/kibana-datasweet-formula/blob/master/LICENSE)
 
 [![datasweet-logo](docs/img/datasweet.png)](http://www.datasweet.fr)
 
@@ -16,7 +16,7 @@ This plugin is supported by :
  - Kibana 6.x
  - Kibana 5.6
 
-Copy the last installation url for your version of Kibana from the [repository releases](https://github.com/datasweet-fr/kibana-datasweet-formula/releases/latest).
+Copy the last installation url for your version of Kibana from the [repository releases](https://github.com/datasweet/kibana-datasweet-formula/releases/latest).
 ```
 ./bin/kibana-plugin install  https://github.com/datasweet-fr/kibana-datasweet-formula/releases/download/version_name/datasweet_formula-X.X.X_kibana-major.minor.patch.zip
 ```
@@ -24,7 +24,7 @@ Copy the last installation url for your version of Kibana from the [repository r
 Check out what it can do in the [documentation.](http://www.datasweet.fr/datasweet-formula/)
 
 # Questions ? problems ? suggestions ?
-If you find a bug or want to request a feature, please create a [GitHub Issue](https://github.com/datasweet-fr/kibana-datasweet-formula/issues/new).
+If you find a bug or want to request a feature, please create a [GitHub Issue](https://github.com/datasweet/kibana-datasweet-formula/issues/new).
 
 # Credits
 Datasweet Formula is built on [Javascript Expression Evaluator](https://silentmatt.com/javascript-expression-evaluator/) by Silent Matt.
