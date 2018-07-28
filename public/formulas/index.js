@@ -9,6 +9,7 @@ import max from './max';
 import min from './min';
 import mvavg from './mvavg';
 import next from './next';
+import percentile from './percentile';
 import prev from './prev';
 import sum from './sum';
 
@@ -24,6 +25,7 @@ export {
     min,
     mvavg,
     next,
+    percentile,
     prev,
     sum
 };
