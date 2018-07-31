@@ -30,8 +30,9 @@ If you find a bug or want to request a feature, please create a [GitHub Issue](h
 Datasweet Formula is built on [Javascript Expression Evaluator](https://silentmatt.com/javascript-expression-evaluator/) by Silent Matt.
 
 # Contributors
-[<img src="https://avatars0.githubusercontent.com/u/16384428?s=100&v=4"/><br /><sub><b>Gustavo Matheus</b></sub>](https://github.com/gmatheus)
-[<img src="https://avatars0.githubusercontent.com/u/41620871?s=100&v=4"/><br /><sub><b>itamarm10</b></sub>](https://github.com/itamarm10)
+[<img src="https://avatars0.githubusercontent.com/u/16384428?s=100&v=4" width="100"/><br /><sub><b>Gustavo Matheus</b></sub>](https://github.com/gmatheus) 
+
+[<img src="https://avatars0.githubusercontent.com/u/41620871?s=100&v=4" width="100"/><br /><sub><b>itamarm10</b></sub>](https://github.com/itamarm10)
   
 
 
