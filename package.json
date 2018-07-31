@@ -44,6 +44,7 @@
   },
   "dependencies": {
     "expr-eval": "^1.2.1",
-    "lodash": "^3.10.1"
+    "lodash": "^3.10.1",
+    "percentile": "^1.2.1"
   }
 }

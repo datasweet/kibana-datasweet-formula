@@ -32,6 +32,7 @@ pages:
     - functions/min.md
     - functions/mvavg.md
     - functions/next.md
+    - functions/percentile.md
     - functions/prev.md
     - functions/sum.md
   - License: license.md
