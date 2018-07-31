@@ -31,6 +31,8 @@ Datasweet Formula is built on [Javascript Expression Evaluator](https://silentma
 
 # Contributors
 [<img src="https://avatars0.githubusercontent.com/u/16384428?s=100&v=4"/><br /><sub><b>Gustavo Matheus</b></sub>](https://github.com/gmatheus)
+[<img src="https://avatars0.githubusercontent.com/u/41620871?s=100&v=4"/><br /><sub><b>itamarm10</b></sub>](https://github.com/itamarm10)
+  
 
 
 # License
