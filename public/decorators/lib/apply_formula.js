@@ -6,6 +6,7 @@ export function AggResponseFormulaProvider(Private)  {
   const FormulaParser = Private(FormulaParserProvider);
   const parser = new FormulaParser(true);
   const varPrefix = 'agg';
+  const prefixRegExpr = new RegExp(varPrefix, 'g');
 
   function hasFormulas(cols) {
     return find(cols, 'aggConfig.type.name', aggTypeFormulaId) !== undefined;
@@ -20,11 +21,15 @@ export function AggResponseFormulaProvider(Private)  {
 
     each(cols, (c, i)=> {
       const colIndex = i;
-      const key = varPrefix + c.aggConfig.id.replace('.', '_');
+      const columnGroupPrefix = c.columnGroup != null ? `colGroup${c.columnGroup}_` : '';
+      const key = columnGroupPrefix + varPrefix + c.aggConfig.id.replace('.', '_');
 
       // formula ?
       if (c.aggConfig.type.name === aggTypeFormulaId) {
-        const f = get(c.aggConfig.params, 'formula', '').trim();
+        const f = get(c.aggConfig.params, 'formula', '')
+          .trim()
+          // Adds columnGroup to prefix
+          .replace(prefixRegExpr, columnGroupPrefix + varPrefix);
         if (f.length > 0) {
           res.formulas.push({
             colIndex,
