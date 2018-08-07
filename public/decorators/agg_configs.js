@@ -10,11 +10,14 @@ export function decorateVisAggConfigsProvider(Private) {
   function removeEmptyValues(obj) {
     return Object.keys(obj)
       .filter(k => obj[k] != null) // Filters out undefined and null objects
-      .reduce((newObj, k) =>
-        typeof obj[k] === 'object' ?
-          { ...newObj, [k]: removeEmptyValues(obj[k]) } : // Recursive call
-          { ...newObj, [k]: obj[k] },
-        {});
+      .reduce((newObj, k) => {
+        // Recursive call for arrays
+        if (Array.isArray(obj[k])) return { ...newObj, [k]: obj[k].map(removeEmptyValues) };
+        // Recursive call for objects
+        return typeof obj[k] === 'object' ?
+          { ...newObj, [k]: removeEmptyValues(obj[k]) } :
+          { ...newObj, [k]: obj[k] };
+      }, {});
   }
 
   const toDslFn = AggConfigs.prototype.toDsl;
