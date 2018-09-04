@@ -1,6 +1,16 @@
 import { each, filter, find, get, isArray, isEmpty, isObject, map } from 'lodash';
 import { FormulaParserProvider } from './formula_parser';
 
+/**
+ * A much needed polyfill since isNil is only available for 4.* version of lodash.
+ *
+ * @param {*} x Value to check whether undefined or null.
+ * @return True if x is undefined or null. False otherwise.
+ */
+function isNil(x) {
+  return x == null;
+}
+
 export function AggResponseFormulaProvider(Private)  {
   const aggTypeFormulaId = 'datasweet_formula';
   const FormulaParser = Private(FormulaParserProvider);
@@ -75,7 +85,7 @@ export function AggResponseFormulaProvider(Private)  {
         const isRowValue = isObject(table.rows[0][0]);
         each(table.rows, (row, i) => {
           each(computed, (data, colIndex) => {
-            const value = (data.isArray ? data.value[i] || null : data.value);
+            const value = (data.isArray ? (isNil(data.value[i]) ? null : data.value[i]) : data.value);
             if (isRowValue) {
               row[colIndex].value = value;
             } else {
