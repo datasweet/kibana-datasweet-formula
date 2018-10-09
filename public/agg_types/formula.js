@@ -1,12 +1,12 @@
 import { capitalize, map } from 'lodash';
-import { AggTypesMetricsMetricAggTypeProvider } from 'ui/agg_types/metrics/metric_agg_type';
-import * as prov from 'ui/registry/field_formats';
+import * as magprov from 'ui/agg_types/metrics/metric_agg_type';
+import * as ffprov from 'ui/registry/field_formats';
 import formulaEditor from './formula.html';
 import formatterEditor from './formatter.html';
 
 export function AggTypesMetricsFormulaProvider(Private) {
-  const MetricAggType = Private(AggTypesMetricsMetricAggTypeProvider);
-  const fieldFormats = prov.fieldFormats || Private(prov.RegistryFieldFormatsProvider);
+  const MetricAggType = magprov.MetricAggType || Private(magprov.AggTypesMetricsMetricAggTypeProvider);
+  const fieldFormats = ffprov.fieldFormats || Private(ffprov.RegistryFieldFormatsProvider);
   const defaultValue = null;
   const formatters = map(['number', 'percent', 'boolean', 'bytes', 'numeral'], f => {
     return { id: f, title: capitalize(f) };
