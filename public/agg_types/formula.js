@@ -1,15 +1,16 @@
-import { map } from 'lodash';
+import { capitalize, map } from 'lodash';
 import { AggTypesMetricsMetricAggTypeProvider } from 'ui/agg_types/metrics/metric_agg_type';
 import * as prov from 'ui/registry/field_formats';
 import formulaEditor from './formula.html';
 import formatterEditor from './formatter.html';
 
-
 export function AggTypesMetricsFormulaProvider(Private) {
   const MetricAggType = Private(AggTypesMetricsMetricAggTypeProvider);
   const fieldFormats = prov.fieldFormats || Private(prov.RegistryFieldFormatsProvider);
   const defaultValue = null;
-  const formatters = map(['number', 'percent', 'boolean', 'bytes'], fieldFormats.getType);
+  const formatters = map(['number', 'percent', 'boolean', 'bytes', 'numeral'], f => {
+    return { id: f, title: capitalize(f) };
+  });
 
   return new MetricAggType({
     name: 'datasweet_formula',
@@ -30,11 +31,30 @@ export function AggTypesMetricsFormulaProvider(Private) {
         getFormatters: function () {
           return formatters;
         }
+      },
+      {
+        name: 'numeralFormat'
       }
     ],
     getFormat: function (agg) {
       const formatterId = agg.params.formatter;
-      return formatterId ? fieldFormats.getInstance(formatterId) : fieldFormats.getDefaultInstance('number');
+
+      if (!formatterId) {
+        return fieldFormats.getDefaultInstance('number');
+      }
+
+      if (formatterId === 'numeral') {
+        const format =  agg.params.numeralFormat;
+        if (!format) {
+          return fieldFormats.getDefaultInstance('number');
+        }
+
+        const FieldFormat = fieldFormats.getType('number');
+        const f = new FieldFormat({ pattern: format });
+        return f;
+      }
+
+      return fieldFormats.getInstance(formatterId);
     },
     getValue: function () {
       return defaultValue;

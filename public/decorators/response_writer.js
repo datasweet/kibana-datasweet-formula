@@ -4,7 +4,7 @@ import { AggResponseFormulaProvider } from './lib/apply_formula';
 import { TableTotalFormulaProvider } from './lib/apply_formula_total';
 import { applyColumnGroups } from './lib/apply_column_groups';
 
-export function decorateTabbedAggResponseWriterProvider(Private) {  
+export function decorateTabbedAggResponseWriterProvider(Private) {
   const TabbedAggResponseWriter = prov.TabbedAggResponseWriter || Private(prov.TabbedAggResponseWriterProvider);
   const applyFormulas = Private(AggResponseFormulaProvider);
   const applyFormulaTotal = Private(TableTotalFormulaProvider);
