@@ -13,7 +13,8 @@ export function decorateTabbedAggResponseWriterProvider(Private) {
   const responseFn = TabbedAggResponseWriter.prototype.response;
   TabbedAggResponseWriter.prototype.response = function () {
     const resp = responseFn.apply(this, arguments);
-    applyColumnGroups(this.columns, this.vis);
+    const isHierarchical = (!!this.vis ? this.vis.isHierarchical() : this.metricsForAllBuckets);
+    applyColumnGroups(this.columns, isHierarchical);
     applyFormulas(this.columns, resp);
     applyFormulaTotal(this.columns, resp);
     applyHiddenCols(this.columns, resp);
