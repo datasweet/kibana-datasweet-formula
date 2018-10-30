@@ -2,14 +2,12 @@ import { find } from 'lodash';
 
 /**
  * Organizes columns in column groups.
- * This is used when `vis.isHierarchical()` returns true,
- *  usually when calculating metrics for every bucket/level.
+ * This is used when 'Calculate metrics for every bucket/level' option is checked.
  * @param {*} columns
- * @param {*} isHierarchical
- */
-
-export function applyColumnGroups(columns, isHierarchical) {
-  if (!isHierarchical) return;
+ * @param {boolean} metricsForAllBuckets
+*/
+export function applyColumnGroups(columns, metricsForAllBuckets) {
+  if (!metricsForAllBuckets) return;
 
   // Do we have datasweet_formula ?
   const isUsingFormula = find(columns, 'aggConfig.type.name', 'datasweet_formula') !== undefined;
