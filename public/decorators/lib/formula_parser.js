@@ -1,6 +1,5 @@
 import math from 'expr-eval';
 import { each, isArray, map } from 'lodash';
-import { createLegacyClass } from 'ui/utils/legacy_class';
 import * as formulas from '../../formulas';
 
 createLegacyClass(FormulaParser);
@@ -25,12 +24,29 @@ function FormulaParser() {
     };
   });
 
-  // Redefine binary operators to work with series.
-  each(parser.binaryOps, (func, funcName) => {
-    const fn = func;
-    parser.binaryOps[funcName] = (a, b) => {
-      const ia = isArray(a);
-      const ib = isArray(b);
+    // Redefine binary operators to work with series.
+    each(parser.binaryOps, (func, funcName) => {
+      let fn = func;
+
+      if (funcName === '/') {
+        fn = (a, b) => {
+          // Javascript have some weird behaviour concerning division.
+          // - 0/0 => NaN
+          // - x/0 | x <> 0 => -/+Infinity
+          // We want NaN for both.
+          if(b === 0) {
+            notify.warning('Divide by 0 occured. Please ensure the denominator is non-zero.');
+            return Number.NaN;
+          }
+
+          // Default behaviour.
+          return func.call(undefined, a, b);
+        };
+      }
+
+      parser.binaryOps[funcName] = (a, b) => {
+        const ia = isArray(a);
+        const ib = isArray(b);
 
       if (ia && ib) {
         const c = new Array();
