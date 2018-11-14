@@ -3,8 +3,6 @@ import { each, isArray, map, isFinite } from 'lodash';
 import { Notifier } from 'ui/notify/notifier';
 import * as formulas from '../../formulas';
 
-const notify = new Notifier({ location: 'Datasweet' });
-
 export function FormulaParserProvider() {
   function FormulaParser(loadAll) {
     this.parser = new math.Parser({
