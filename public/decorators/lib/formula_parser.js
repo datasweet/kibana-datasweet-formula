@@ -1,5 +1,6 @@
 import math from 'expr-eval';
-import { each, isArray, map } from 'lodash';
+import { each, isArray, map, isFinite } from 'lodash';
+import { Notifier } from 'ui/notify/notifier';
 import * as formulas from '../../formulas';
 
 export function FormulaParserProvider() {
@@ -26,7 +27,27 @@ export function FormulaParserProvider() {
 
     // Redefine binary operators to work with series.
     each(parser.binaryOps, (func, funcName) => {
-      const fn = func;
+      let fn = func;
+
+      if (funcName === '/') {
+        fn = (a, b) => {
+          // Javascript have some weird behaviour concerning division.
+          // - 0/0 => NaN
+          // - x/0 | x <> 0 => -/+Infinity
+          // We want null for both, so they are ignored.
+          // In addition,
+          // - (non finite) / finite should be null
+          // - finite / (non finite)  should be null.
+          const operandsContainsNonFinite = !isFinite(a) || !isFinite(b);
+          if(operandsContainsNonFinite || b === 0) {
+            return null;
+          }
+
+          // Default behaviour.
+          return func.call(undefined, a, b);
+        };
+      }
+
       parser.binaryOps[funcName] = (a, b) => {
         const ia = isArray(a);
         const ib = isArray(b);
