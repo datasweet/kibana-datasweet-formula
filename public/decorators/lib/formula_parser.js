@@ -1,5 +1,5 @@
 import math from 'expr-eval';
-import { each, isArray, map } from 'lodash';
+import { each, isArray, map, isFinite } from 'lodash';
 import * as formulas from '../../formulas';
 
 createLegacyClass(FormulaParser);
@@ -34,7 +34,11 @@ function FormulaParser() {
           // - 0/0 => NaN
           // - x/0 | x <> 0 => -/+Infinity
           // We want null for both, so they are ignored.
-          if(b === 0) {
+          // In addition,
+          // - (non finite) / finite should be null
+          // - finite / (non finite)  should be null.
+          const operandsContainsNonFinite = !isFinite(a) || !isFinite(b);
+          if(operandsContainsNonFinite || b === 0) {
             return null;
           }
 
