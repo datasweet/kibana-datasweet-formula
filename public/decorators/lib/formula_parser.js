@@ -35,7 +35,6 @@ function FormulaParser() {
           // - x/0 | x <> 0 => -/+Infinity
           // We want null for both, so they are ignored.
           if(b === 0) {
-            notify.warning('Divide by 0 occured. Please ensure the denominator is non-zero.');
             return null;
           }
 
