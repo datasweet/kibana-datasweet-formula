@@ -33,10 +33,10 @@ function FormulaParser() {
           // Javascript have some weird behaviour concerning division.
           // - 0/0 => NaN
           // - x/0 | x <> 0 => -/+Infinity
-          // We want NaN for both.
+          // We want null for both, so they are ignored.
           if(b === 0) {
             notify.warning('Divide by 0 occured. Please ensure the denominator is non-zero.');
-            return Number.NaN;
+            return null;
           }
 
           // Default behaviour.
