@@ -7,3 +7,9 @@
         class="form-control">
     </select>
 </div>
+<div class="form-group" ng-show="agg.params.formatter === 'numeral'">
+    <label>Numeral format</label>
+    <div>
+        <input type="text" ng-model="agg.params.numeralFormat" class="form-control" />
+    </div>
+</div>

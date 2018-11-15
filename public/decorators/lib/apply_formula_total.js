@@ -83,8 +83,9 @@ export function TableTotalFormulaProvider(Private)  {
       const sum = tableRows => tableRows.reduce((prev, curr) => {
         // some metrics return undefined for some of the values
         // derivative is an example of this as it returns undefined in the first row
-        if (curr[i].value === undefined) return prev;
-        return prev + curr[i].value;
+        const v = get(curr[i], 'value');
+        if (v === undefined) return prev;
+        return prev + v;
       }, 0);
 
       arr[i] = {

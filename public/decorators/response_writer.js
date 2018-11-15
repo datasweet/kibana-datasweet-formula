@@ -4,7 +4,7 @@ import { AggResponseFormulaProvider } from './lib/apply_formula';
 import { TableTotalFormulaProvider } from './lib/apply_formula_total';
 import { applyColumnGroups } from './lib/apply_column_groups';
 
-export function decorateTabbedAggResponseWriterProvider(Private) {  
+export function decorateTabbedAggResponseWriterProvider(Private) {
   const TabbedAggResponseWriter = prov.TabbedAggResponseWriter || Private(prov.TabbedAggResponseWriterProvider);
   const applyFormulas = Private(AggResponseFormulaProvider);
   const applyFormulaTotal = Private(TableTotalFormulaProvider);
@@ -13,7 +13,8 @@ export function decorateTabbedAggResponseWriterProvider(Private) {
   const responseFn = TabbedAggResponseWriter.prototype.response;
   TabbedAggResponseWriter.prototype.response = function () {
     const resp = responseFn.apply(this, arguments);
-    applyColumnGroups(this.columns, this.vis);
+    const isHierarchical = (!!this.vis ? this.vis.isHierarchical() : this.metricsForAllBuckets);
+    applyColumnGroups(this.columns, isHierarchical);
     applyFormulas(this.columns, resp);
     applyFormulaTotal(this.columns, resp);
     applyHiddenCols(this.columns, resp);
