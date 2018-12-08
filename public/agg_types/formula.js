@@ -8,7 +8,7 @@ export function AggTypesMetricsFormulaProvider(Private) {
   const MetricAggType = magprov.MetricAggType || Private(magprov.AggTypesMetricsMetricAggTypeProvider);
   const fieldFormats = ffprov.fieldFormats || Private(ffprov.RegistryFieldFormatsProvider);
   const defaultValue = null;
-  const formatters = map(['number', 'percent', 'boolean', 'bytes', 'numeral'], f => {
+  const formatters = map(['number', 'percent', 'boolean', 'bytes', 'numeral', 'date'], f => {
     return { id: f, title: capitalize(f) };
   });
 
@@ -38,7 +38,6 @@ export function AggTypesMetricsFormulaProvider(Private) {
     ],
     getFormat: function (agg) {
       const formatterId = agg.params.formatter;
-
       if (!formatterId) {
         return fieldFormats.getDefaultInstance('number');
       }

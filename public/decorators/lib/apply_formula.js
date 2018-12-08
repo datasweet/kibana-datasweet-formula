@@ -33,6 +33,7 @@ export function AggResponseFormulaProvider(Private)  {
       const colIndex = i;
       const columnGroupPrefix = c.columnGroup != null ? `colGroup${c.columnGroup}_` : '';
       const key = columnGroupPrefix + varPrefix + c.aggConfig.id.replace('.', '_');
+			const colName = c.id;
 
       // formula ?
       if (c.aggConfig.type.name === aggTypeFormulaId) {
@@ -43,6 +44,7 @@ export function AggResponseFormulaProvider(Private)  {
         if (f.length > 0) {
           res.formulas.push({
             colIndex,
+						colName,
             key,
             compiled: (f.length > 0 ? parser.parse(f) : null)
           });
@@ -53,7 +55,7 @@ export function AggResponseFormulaProvider(Private)  {
       // series.
       else {
         // TODO: analyze all formulas to build dependencies
-        res.series[key] = map(rows, r => rowValue(r[colIndex]));
+        res.series[key] = map(rows, r => rowValue(r[colName]));
       }
     });
 
@@ -66,7 +68,7 @@ export function AggResponseFormulaProvider(Private)  {
       let res = null;
       try {
         res = f.compiled.evaluate(datas.series);
-        computed[f.colIndex] = { value: res, isArray: isArray(res) };
+        computed[f.colName] = { value: res, isArray: isArray(res) };
       } catch (e) {
         res = null;
         // console.log('ERROR', e);
@@ -89,12 +91,12 @@ export function AggResponseFormulaProvider(Private)  {
       if (!isEmpty(computed)) {
         const isRowValue = isObject(table.rows[0][0]);
         each(table.rows, (row, i) => {
-          each(computed, (data, colIndex) => {
+          each(computed, (data, colName) => {
             const value = (data.isArray ? (isNil(data.value[i]) ? null : data.value[i]) : data.value);
             if (isRowValue) {
-              row[colIndex].value = value;
+              row[colName].value = value;
             } else {
-              row[colIndex] = value;
+              row[colName] = value;
             }
           });
         });

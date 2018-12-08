@@ -21,11 +21,11 @@ export function decorateVisAggConfigsProvider(Private) {
   }
 
   const toDslFn = AggConfigs.prototype.toDsl;
-  AggConfigs.prototype.toDsl = function () {
-    const isUsingFormula = !!this.vis.aggs.byTypeName.datasweet_formula;
+  AggConfigs.prototype.toDsl = function (hierarchical = false) {
+    const isUsingFormula = !!this.byTypeName.datasweet_formula;
     const dsl = toDslFn.apply(this, arguments);
     // Removes empty `datasweet_formula` aggs from dsl query if needed.
     //  This happens when `vis.isHierarchical()` returns true
-    return isUsingFormula && this.vis.isHierarchical() ? removeEmptyValues(dsl) : dsl;
+    return isUsingFormula && hierarchical ? removeEmptyValues(dsl) : dsl;
   };
 };

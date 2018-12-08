@@ -4,7 +4,7 @@
   "description": "This Kibana plugin allows calculated metrics on any standard kibana visualizations.",
   "main": "index.js",
   "kibana": {
-    "version": "kibana"
+    "version": "6.5.1"
   },
   "scripts": {
     "preinstall": "node ../../kibana/preinstall_check",
