@@ -38,7 +38,6 @@ export function AggTypesMetricsFormulaProvider(Private) {
     ],
     getFormat: function (agg) {
       const formatterId = agg.params.formatter;
-
       if (!formatterId) {
         return fieldFormats.getDefaultInstance('number');
       }

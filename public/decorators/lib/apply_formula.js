@@ -29,8 +29,8 @@ export function AggResponseFormulaProvider(Private)  {
   function extractSeriesAndFormulas(rows, cols) {
     const res = { series: {}, formulas:[] };
 
-    each(cols, (c, i)=> {
-      const colIndex = i;
+    each(cols, c => {
+      const colId = c.id;
       const columnGroupPrefix = c.columnGroup != null ? `colGroup${c.columnGroup}_` : '';
       const key = columnGroupPrefix + varPrefix + c.aggConfig.id.replace('.', '_');
 
@@ -42,7 +42,7 @@ export function AggResponseFormulaProvider(Private)  {
           .replace(prefixRegExpr, columnGroupPrefix + varPrefix);
         if (f.length > 0) {
           res.formulas.push({
-            colIndex,
+            colId,
             key,
             compiled: (f.length > 0 ? parser.parse(f) : null)
           });
@@ -53,7 +53,7 @@ export function AggResponseFormulaProvider(Private)  {
       // series.
       else {
         // TODO: analyze all formulas to build dependencies
-        res.series[key] = map(rows, r => rowValue(r[colIndex]));
+        res.series[key] = map(rows, r => rowValue(r[colId]));
       }
     });
 
@@ -66,7 +66,7 @@ export function AggResponseFormulaProvider(Private)  {
       let res = null;
       try {
         res = f.compiled.evaluate(datas.series);
-        computed[f.colIndex] = { value: res, isArray: isArray(res) };
+        computed[f.colId] = { value: res, isArray: isArray(res) };
       } catch (e) {
         res = null;
         // console.log('ERROR', e);
@@ -89,12 +89,12 @@ export function AggResponseFormulaProvider(Private)  {
       if (!isEmpty(computed)) {
         const isRowValue = isObject(table.rows[0][0]);
         each(table.rows, (row, i) => {
-          each(computed, (data, colIndex) => {
+          each(computed, (data, colId) => {
             const value = (data.isArray ? (isNil(data.value[i]) ? null : data.value[i]) : data.value);
             if (isRowValue) {
-              row[colIndex].value = value;
+              row[colId].value = value;
             } else {
-              row[colIndex] = value;
+              row[colId] = value;
             }
           });
         });

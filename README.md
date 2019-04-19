@@ -12,9 +12,10 @@ We are Datasweet, a french startup providing full service (big) data solutions. 
 ![tutorial-datasweet-formula](docs/img/tutorial-datasweet-formula.gif)
 
 # Installation
-This plugin is supported by : 
- - Kibana 6.4.x
- - Kibana 5.6
+This plugin is supported by :
+ - Kibana 6.7.x
+ - Kibana 6.6.x
+ - Kibana 6.5.x
 
 Copy the last installation url for your version of Kibana from the [repository releases](https://github.com/datasweet/kibana-datasweet-formula/releases/latest).
 ```
@@ -28,11 +29,22 @@ Check out what it can do in the [documentation.](http://www.datasweet.fr/dataswe
 
 See the [kibana contributing guide](https://github.com/elastic/kibana/blob/master/CONTRIBUTING.md) for instructions setting up your development environment. Once you have completed that, use the following yarn scripts.
 
-  - `yarn kbn bootstrap`
+    > ***IMPORTANT:*** You must have the following tree :
+      - kibana/
+      - kibana-extra/
+          - kibana-datasweet-formula/
 
-    Install dependencies and crosslink Kibana and all projects/plugins.
-
-    > ***IMPORTANT:*** Use this script instead of `yarn` to install dependencies when switching branches, and re-run it whenever your dependencies change.
+  ```bash
+  cd kibana
+  git checkout vX
+  rm -Rf node_modules/
+  nvm use
+  yarn kbn bootstrap
+  cd ../kibana-extra/kibana-datasweet-formula/
+  rm -Rf node_modules/
+  yarn kbn bootstrap
+  yarn start
+  ```
 
   - `yarn start`
 
