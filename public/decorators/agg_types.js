@@ -1,9 +1,7 @@
-import * as prov from 'ui/agg_types';
-import { AggTypesMetricsFormulaProvider } from 'plugins/datasweet_formula/agg_types/formula';
+import { aggTypes } from 'ui/agg_types';
+import { formulaMetricAgg } from 'plugins/datasweet_formula/agg_types/formula';
 
-export function decorateAggTypes(Private) {
-  const AggTypes = prov.aggTypes || Private(prov.AggTypesIndexProvider);
-  const AggFormula = Private(AggTypesMetricsFormulaProvider);
-  AggFormula.type = 'metrics';
-  AggTypes.push(AggFormula);
+export function decorateAggTypes() {
+  formulaMetricAgg.type = 'metrics';
+  aggTypes.push(formulaMetricAgg);
 };
