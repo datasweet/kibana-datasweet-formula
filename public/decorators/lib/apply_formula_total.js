@@ -72,6 +72,7 @@ export function TableTotalFormulaProvider(Private)  {
     each(datas.formulas, f => {
       try {
         const res = f.compiled.evaluate(datas.series);
+        datas.series[f.key] = res
         $scope.formattedColumns[f.colIndex].total = f.formatter(res);
       }catch (e) {
         // console.log('ERROR', e);
