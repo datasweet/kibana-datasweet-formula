@@ -1,8 +1,6 @@
-import * as prov from 'ui/vis/agg_configs';
+import { AggConfigs } from 'ui/vis/agg_configs';
 
-export function decorateVisAggConfigsProvider(Private) {
-  const AggConfigs = prov.AggConfigs || Private(prov.VisAggConfigsProvider);
-
+export function decorateVisAggConfigs() {
   /**
    * Recursively removes undefined values from object.
    * @param {*} obj

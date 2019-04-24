@@ -1,6 +1,6 @@
 import chrome from 'ui/chrome';
 import { uiModules } from 'ui/modules';
-import { TableTotalFormulaProvider } from './lib/apply_formula_total';
+import { applyFormulaTotal } from './lib/apply_formula_total';
 const appId = chrome.getApp().id;
 
 // Defines the $scope.totalFunc allowed to perform the calculations
@@ -12,10 +12,9 @@ if (appId === 'kibana') {
     .get('kibana')
     .config(($provide) => {
       // Decorates kbnAggTable default directive
-      $provide.decorator('kbnAggTableDirective', ($delegate, $controller, Private) => {
+      $provide.decorator('kbnAggTableDirective', ($delegate, $controller) => {
         const directive = $delegate[0];
         const controllerName = directive.controller;
-        const applyFormulaTotal = Private(TableTotalFormulaProvider);
 
         directive.controller = function ($scope) {
           angular.extend(this, $controller(controllerName, { $scope: $scope }));
@@ -27,7 +26,18 @@ if (appId === 'kibana') {
             // Validations
             if (!table) return;
             const hasColumns = !!table.columns.length;
-            const hasFormulas = !!table.columns.find(c => c.aggConfig.type.name === 'datasweet_formula');
+
+            // Formatters
+            let hasFormulas = false;
+            table.columns.forEach((col, i) => {
+              if (col.aggConfig.type.name !== 'datasweet_formula') {
+                return;
+              }
+              hasFormulas = true;
+              $scope.formattedColumns[i].formatter = { convert: col.aggConfig.fieldFormatter('text') };
+            });
+
+            // Total
             const isTotalFunctionAllowed = $scope.showTotal && TOTAL_FUNCTIONS_ALLOWED.includes($scope.totalFunc);
             const shouldApplyFormula = hasColumns && hasFormulas && isTotalFunctionAllowed;
             if (!shouldApplyFormula) return;

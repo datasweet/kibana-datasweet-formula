@@ -1,6 +1,6 @@
 {
   "name": "datasweet_formula",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "This Kibana plugin allows calculated metrics on any standard kibana visualizations.",
   "main": "index.js",
   "kibana": {
@@ -52,7 +52,6 @@
   },
   "dependencies": {
     "expr-eval": "^1.2.1",
-    "lodash": "^3.10.1",
     "percentile": "^1.2.1"
   }
 }

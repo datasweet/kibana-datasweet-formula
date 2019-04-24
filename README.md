@@ -13,9 +13,11 @@ We are Datasweet, a french startup providing full service (big) data solutions. 
 
 # Installation
 This plugin is supported by :
- - Kibana 6.7.x
- - Kibana 6.6.x
- - Kibana 6.5.x
+ - Kibana 7.0.x => v2.2.0
+ - Kibana 6.5.x to 6.7.x => v2.1.0
+ - Kibana 6.4.x => v2.0.0
+ - Kibana 5.6.x to 6.3.x => v1.1.3
+
 
 Copy the last installation url for your version of Kibana from the [repository releases](https://github.com/datasweet/kibana-datasweet-formula/releases/latest).
 ```
