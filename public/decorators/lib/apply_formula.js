@@ -87,7 +87,7 @@ export function AggResponseFormulaProvider(Private)  {
 
       // Apply
       if (!isEmpty(computed)) {
-        const isRowValue = isObject(table.rows[0][0]);
+        const isRowValue = isObject(get(table.rows, '[0][0]'));
         each(table.rows, (row, i) => {
           each(computed, (data, colId) => {
             const value = (data.isArray ? (isNil(data.value[i]) ? null : data.value[i]) : data.value);
