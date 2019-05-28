@@ -1,5 +1,6 @@
 import math from 'expr-eval';
 import { each, isArray, map, isFinite } from 'lodash';
+import { createLegacyClass } from 'ui/utils/legacy_class';
 import * as formulas from '../../formulas';
 
 createLegacyClass(FormulaParser);
