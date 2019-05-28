@@ -7,7 +7,6 @@
     "version": "kibana"
   },
   "scripts": {
-    "preinstall": "node ../../preinstall_check",
     "kbn": "node ../../scripts/kbn",
     "lint": "eslint **/*.js",
     "start": "plugin-helpers start",
