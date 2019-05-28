@@ -1,8 +1,6 @@
-import * as prov from 'ui/vis/agg_configs';
+import { AggConfigs } from 'ui/vis/agg_configs';
 
-export function decorateVisAggConfigsProvider(Private) {
-  const AggConfigs = prov.AggConfigs || Private(prov.VisAggConfigsProvider);
-
+export function decorateVisAggConfigs() {
   /**
    * Recursively removes undefined values from object.
    * @param {*} obj
@@ -21,11 +19,9 @@ export function decorateVisAggConfigsProvider(Private) {
   }
 
   const toDslFn = AggConfigs.prototype.toDsl;
-  AggConfigs.prototype.toDsl = function () {
-    const isUsingFormula = !!this.vis.aggs.byTypeName.datasweet_formula;
+  AggConfigs.prototype.toDsl = function (hierarchical = false) {
+    const isUsingFormula = !!this.byTypeName.datasweet_formula;
     const dsl = toDslFn.apply(this, arguments);
-    // Removes empty `datasweet_formula` aggs from dsl query if needed.
-    //  This happens when `vis.isHierarchical()` returns true
-    return isUsingFormula && this.vis.isHierarchical() ? removeEmptyValues(dsl) : dsl;
+    return isUsingFormula && hierarchical ? removeEmptyValues(dsl) : dsl;
   };
 };

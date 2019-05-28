@@ -12,16 +12,63 @@ We are Datasweet, a french startup providing full service (big) data solutions. 
 ![tutorial-datasweet-formula](docs/img/tutorial-datasweet-formula.gif)
 
 # Installation
-This plugin is supported by : 
- - Kibana 6.x
- - Kibana 5.6
+This plugin is supported by :
+ - Kibana 7.0.x => v2.2.0
+ - Kibana 6.5.x to 6.7.x => v2.1.0
+ - Kibana 6.4.x => v2.0.0
+ - Kibana 5.6.x to 6.3.x => v1.1.3
+
 
 Copy the last installation url for your version of Kibana from the [repository releases](https://github.com/datasweet/kibana-datasweet-formula/releases/latest).
 ```
 ./bin/kibana-plugin install  https://github.com/datasweet-fr/kibana-datasweet-formula/releases/download/version_name/datasweet_formula-X.X.X_kibana-major.minor.patch.zip
 ```
+
 # Features
 Check out what it can do in the [documentation.](http://www.datasweet.fr/datasweet-formula/)
+
+# Development
+
+See the [kibana contributing guide](https://github.com/elastic/kibana/blob/master/CONTRIBUTING.md) for instructions setting up your development environment. Once you have completed that, use the following yarn scripts.
+
+    > ***IMPORTANT:*** You must have the following tree :
+      - kibana/
+      - kibana-extra/
+          - kibana-datasweet-formula/
+
+  ```bash
+  cd kibana
+  git checkout vX
+  rm -Rf node_modules/
+  nvm use
+  yarn kbn bootstrap
+  cd ../kibana-extra/kibana-datasweet-formula/
+  rm -Rf node_modules/
+  yarn kbn bootstrap
+  yarn start
+  ```
+
+  - `yarn start`
+
+    Start kibana and have it include this plugin. You can pass any arguments that you would normally send to `bin/kibana`
+
+      ```
+      yarn start --elasticsearch.url http://localhost:9220
+      ```
+
+  - `yarn build`
+
+    Build a distributable archive of your plugin.
+
+  - `yarn test:browser`
+
+    Run the browser tests in a real web browser.
+
+  - `yarn test:server`
+
+    Run the server tests using mocha.
+
+For more information about any of these commands run `yarn ${task} --help`. For a full list of tasks checkout the `package.json` file, or run `yarn run`.
 
 # Questions ? problems ? suggestions ?
 If you find a bug or want to request a feature, please create a [GitHub Issue](https://github.com/datasweet/kibana-datasweet-formula/issues/new).
