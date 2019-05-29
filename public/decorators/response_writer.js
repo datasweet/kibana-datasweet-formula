@@ -1,22 +1,15 @@
-import * as prov from 'ui/agg_response/tabify/_response_writer';
-import { AggResponseHiddenColumnsProvider } from './lib/apply_hidden';
-import { AggResponseFormulaProvider } from './lib/apply_formula';
-import { TableTotalFormulaProvider } from './lib/apply_formula_total';
+import { TabbedAggResponseWriter } from 'ui/agg_response/tabify/_response_writer';
 import { applyColumnGroups } from './lib/apply_column_groups';
+import { applyFormula } from './lib/apply_formula';
+import { applyHiddenCols } from './lib/apply_hidden_cols';
 
-export function decorateTabbedAggResponseWriterProvider(Private) {
-  const TabbedAggResponseWriter = prov.TabbedAggResponseWriter || Private(prov.TabbedAggResponseWriterProvider);
-  const applyFormulas = Private(AggResponseFormulaProvider);
-  const applyFormulaTotal = Private(TableTotalFormulaProvider);
-  const applyHiddenCols = Private(AggResponseHiddenColumnsProvider);
-
+export function decorateTabbedAggResponseWriter() {
   const responseFn = TabbedAggResponseWriter.prototype.response;
   TabbedAggResponseWriter.prototype.response = function () {
     const resp = responseFn.apply(this, arguments);
-    const isHierarchical = (!!this.vis ? this.vis.isHierarchical() : this.metricsForAllBuckets);
-    applyColumnGroups(this.columns, isHierarchical);
-    applyFormulas(this.columns, resp);
-    applyFormulaTotal(this.columns, resp);
+    const metricsForAllBuckets = this.metricsForAllBuckets;
+    applyColumnGroups(this.columns, metricsForAllBuckets);
+    applyFormula(this.columns, resp);
     applyHiddenCols(this.columns, resp);
     return resp;
   };

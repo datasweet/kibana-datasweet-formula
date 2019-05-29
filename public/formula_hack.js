@@ -1,30 +1,30 @@
 import { reduce } from 'lodash';
 import { uiModules } from  'ui/modules';
 import chrome from 'ui/chrome';
-import { decorateVisAggConfigProvider } from './decorators/agg_config';
-import { decorateVisAggConfigsProvider } from './decorators/agg_configs';
+import { decorateVisAggConfig } from './decorators/agg_config';
+import { decorateVisAggConfigs } from './decorators/agg_configs';
 import { decorateAggTypes } from './decorators/agg_types';
-import { decorateTabbedAggResponseWriterProvider } from './decorators/response_writer';
+import { decorateTabbedAggResponseWriter} from './decorators/response_writer';
 import hiddenTpl from './decorators/agg_hidden.html';
 import titleTpl from './decorators/agg_title.html';
 import './decorators/agg_table';
 
-try {
-  const appId = chrome.getApp().id;
 
-  // Only inject decorator on kibana app
-  if (appId === 'kibana' || appId === 'dashboardViewer') {
+const appId = chrome.getApp().id;
 
-    uiModules
+// Only inject decorator on kibana app
+if (appId === 'kibana' || appId === 'dashboardViewer') {
+
+  uiModules
     .get('datasweet/formula', ['kibana'])
-    .run((Private) => {
-      decorateVisAggConfigProvider(Private);
-      decorateVisAggConfigsProvider(Private);
-      decorateAggTypes(Private);
-      decorateTabbedAggResponseWriterProvider(Private);
+    .run(() => {
+      decorateVisAggConfig();
+      decorateVisAggConfigs();
+      decorateAggTypes();
+      decorateTabbedAggResponseWriter();
     });
 
-    uiModules
+  uiModules
     .get('app/visualize')
     .config(($provide) => {
       $provide.decorator('visEditorAggDirective', ($delegate) => {
@@ -38,8 +38,8 @@ try {
           .replace('<!-- disable aggregation -->', hiddenTpl);
 
         // Inject new function in scope
-        $delegate[0].compile = function (tElem, tAttr) {
-          return function newLinkFn($scope, $el, attrs, kbnForm) {
+        $delegate[0].compile = function () {
+          return function newLinkFn($scope) {
             linkFn.apply($delegate[0], arguments);
 
             $scope.canHide = function (aggregation) {
@@ -57,7 +57,4 @@ try {
         return $delegate;
       });
     });
-  }
-} catch (e) {
-  console.error(e);
 }
