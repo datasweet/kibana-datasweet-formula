@@ -17,6 +17,8 @@ if [ -n "$1" ]; then
   exit
 fi
 
+build 6.8.0
+build 6.7.2
 build 6.7.1
 build 6.7.0
 build 6.6.2
