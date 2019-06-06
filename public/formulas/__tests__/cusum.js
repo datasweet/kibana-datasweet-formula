@@ -1,19 +1,16 @@
 import expect from 'expect.js';
 import ngMock from 'ng_mock';
 import 'ui/private';
-import { FormulaParserProvider } from '../../decorators/lib/formula_parser';
+import { formulaParser } from '../../decorators/lib/formula_parser';
 import func from '../cusum';
 
 describe('Cusum', ()  => {
   let FormulaParser;
 
   beforeEach(ngMock.module('kibana'));
-  beforeEach(ngMock.inject(function (Private) {
-    FormulaParser = Private(FormulaParserProvider);
-  }));
 
   it('should work', () => {
-    const parser = new FormulaParser();
+    const parser = formulaParser;
     parser.addFunc(func);
     expect(parser.evaluate('cusum()')).to.equal(null);
     expect(parser.evaluate('cusum(2)')).to.equal(2);

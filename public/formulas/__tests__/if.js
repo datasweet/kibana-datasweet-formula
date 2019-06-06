@@ -1,19 +1,16 @@
 import expect from 'expect.js';
 import ngMock from 'ng_mock';
 import 'ui/private';
-import { FormulaParserProvider } from '../../decorators/lib/formula_parser';
+import { formulaParser } from '../../decorators/lib/formula_parser';
 import func from '../if';
 
 describe('sum', ()  => {
   let FormulaParser;
 
   beforeEach(ngMock.module('kibana'));
-  beforeEach(ngMock.inject(function (Private) {
-    FormulaParser = Private(FormulaParserProvider);
-  }));
 
   it('should work', () => {
-    const parser = new FormulaParser();
+    const parser = formulaParser;
     parser.addFunc(func);
 
     expect(parser.evaluate('if(true, 1, 0)')).to.equal(1);

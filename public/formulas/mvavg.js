@@ -1,5 +1,5 @@
 import { FormulaFunction } from './formula_function';
-import { contains, isArray, map, reduce, sum } from 'lodash';
+import { includes, isArray, map, reduce, sum } from 'lodash';
 
 // Based on timelion moving average
 export default new FormulaFunction('mvavg', {
@@ -34,7 +34,7 @@ export default new FormulaFunction('mvavg', {
     return mvavg(
       series,
       window <= 0 ? 3 : window,
-      !contains(['left', 'right', 'center'], position) ? 'center' : position
+      !includes(['left', 'right', 'center'], position) ? 'center' : position
     );
   }
 });
