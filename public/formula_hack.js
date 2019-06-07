@@ -1,4 +1,4 @@
-import { reduce } from 'lodash';
+import { get, reduce } from 'lodash';
 import { uiModules } from  'ui/modules';
 import chrome from 'ui/chrome';
 import { decorateVisAggConfig } from './decorators/agg_config';
@@ -10,7 +10,7 @@ import titleTpl from './decorators/agg_title.html';
 import './decorators/agg_table';
 
 
-const appId = chrome.getApp().id;
+const appId = get(chrome.getApp(), 'id');
 
 // Only inject decorator on kibana app
 if (appId === 'kibana' || appId === 'dashboardViewer') {

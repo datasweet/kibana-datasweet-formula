@@ -1,7 +1,8 @@
+import { get } from 'lodash';
 import chrome from 'ui/chrome';
 import { uiModules } from 'ui/modules';
 import { applyFormulaTotal } from './lib/apply_formula_total';
-const appId = chrome.getApp().id;
+const appId = get(chrome.getApp(), 'id');
 
 // Defines the $scope.totalFunc allowed to perform the calculations
 const TOTAL_FUNCTIONS_ALLOWED = ['sum', 'avg'];
