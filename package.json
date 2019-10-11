@@ -35,9 +35,9 @@
   },
   "homepage": "https://github.com/datasweet-fr/kibana-datasweet-formula#readme",
   "devDependencies": {
-    "@elastic/eslint-config-kibana": "link:../../packages/eslint-config-kibana",
+    "@elastic/eslint-config-kibana": "0.15.0",
     "@elastic/eslint-import-resolver-kibana": "link:../../packages/kbn-eslint-import-resolver-kibana",
-    "@kbn/plugin-helpers": "link:../../packages/kbn-plugin-helpers",
+    "@kbn/plugin-helpers": "9.0.2",
     "babel-eslint": "6.0.0",
     "eslint": "^4.16.2",
     "eslint-plugin-babel": "^4.1.1",
