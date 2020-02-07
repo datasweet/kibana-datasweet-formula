@@ -6,14 +6,6 @@
   "kibana": {
     "version": "kibana"
   },
-  "scripts": {
-    "kbn": "node ../../scripts/kbn",
-    "lint": "eslint **/*.js",
-    "start": "plugin-helpers start",
-    "test:server": "plugin-helpers test:server",
-    "test:browser": "plugin-helpers test:browser",
-    "build": "plugin-helpers build"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://tcharlot-datasweet@github.com/datasweet-fr/kibana-datasweet-formula.git"
