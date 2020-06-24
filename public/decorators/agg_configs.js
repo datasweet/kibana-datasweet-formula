@@ -1,4 +1,4 @@
-import { AggConfigs } from 'ui/vis/agg_configs';
+import { AggConfigs } from '../../../../src/legacy/ui/public/agg_types';
 
 export function decorateVisAggConfigs() {
   /**

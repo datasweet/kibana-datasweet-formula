@@ -1,5 +1,5 @@
 import { isBoolean } from 'lodash';
-import { AggConfig } from 'ui/vis/agg_config';
+import { AggConfig } from '../../../../src/legacy/ui/public/agg_types';
 
 
 export function decorateVisAggConfig() {
