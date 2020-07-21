@@ -1,18 +1,10 @@
 {
   "name": "datasweet_formula",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "description": "This Kibana plugin allows calculated metrics on any standard kibana visualizations.",
   "main": "index.js",
   "kibana": {
     "version": "kibana"
-  },
-  "scripts": {
-    "kbn": "node ../../scripts/kbn",
-    "lint": "eslint **/*.js",
-    "start": "plugin-helpers start",
-    "test:server": "plugin-helpers test:server",
-    "test:browser": "plugin-helpers test:browser",
-    "build": "plugin-helpers build"
   },
   "repository": {
     "type": "git",

@@ -38,10 +38,12 @@ See the [kibana contributing guide](https://github.com/elastic/kibana/blob/maste
 
   ```bash
   cd kibana
-  git checkout vX
+  git checkout v7.x
   rm -Rf node_modules/
   nvm use
   yarn kbn bootstrap
+  docker run -p 9200:9200 docker.elastic.co/elasticsearch/elasticsearch:7.x
+  node scripts/makelogs.js
   cd ../kibana-extra/kibana-datasweet-formula/
   rm -Rf node_modules/
   yarn kbn bootstrap
