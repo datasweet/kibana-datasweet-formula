@@ -7,6 +7,29 @@
 Hi all !
 We are Datasweet, a french startup providing full service (big) data solutions. We tweaked Kibana to fit our needs. We are happy to release Datasweet Formula, a real time calculated metric plugin, that works on any standard Kibana visualization. Check out what it can do in the [documentation.](http://www.datasweet.fr/datasweet-formula/)
 
+# Getting Started
+For a proper introduction to SonarK, please go through [SonarK Getting Started](https://docs.google.com/document/d/1wnHY_EPltVeOxslYbrFZCXA7PdyNziK1lpWEo0EtGqc/edit?usp=sharing) document.
+
+# Guidelines
+* [Development Guidelines](https://docs.google.com/document/d/1moJrsfHDRO5_ya7KJiHMmxNKhVhdjwNtYtDH8NBTRKs/edit?usp=sharing)
+* [Development Framework](https://docs.google.com/document/d/1sEl-QGrsmwd6vF3Yx6JNU91ewANpcG6UFaEAATZzThg/edit?usp=sharing)
+
+## Framework
+Following here we have all the sections that require some comment.
+
+### Version Control
+Everything is at https://github.com/jsonar/kibana
+
+### Pull Requests
+
+### Code
+SonarK inherits it's JavaScript style guide from elastic/kibana. All JavaScript code must
+abide by that style guide.
+
+### Branches
+As of today (September 3rd, 2020) we have an unstable `master`. We will start to use `develop` branch as
+our default pull request target and `master` will be stable.
+
 # Example : simple ratio calculation
 
 ![tutorial-datasweet-formula](docs/img/tutorial-datasweet-formula.gif)
@@ -104,4 +127,10 @@ distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
 WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 License for the specific language governing permissions and limitations under
 the License.
+```
+
+```
+Copyright 2013-2020 jSonar Inc All Rights Reserved.
+
+NOTICE: All information contained herein is, and remains the property of jSonar Incorporated and its suppliers, if any. The intellectual and technical concepts contained herein are proprietary to jSonar Incorporated and its suppliers and may be covered by U.S. and Foreign Patents, patents in process, and are protected by trade secret or copyright law. Dissemination of this information or reproduction of this material is strictly forbidden unless prior written permission is obtained from jSonar Incorporated.
 ```
