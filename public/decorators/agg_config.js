@@ -1,12 +1,11 @@
 import { isBoolean } from 'lodash';
-import { AggConfig } from 'ui/vis/agg_config';
+import { AggConfig } from 'ui/agg_types/agg_config';
 
 
 export function decorateVisAggConfig() {
   Object.defineProperty(AggConfig.prototype, 'hidden', {
     get: function () {
       if (isBoolean(this.__hidden)) return this.__hidden;           // current value
-      if (isBoolean(this._opts.hidden)) return this._opts.hidden;   // init value
       return false;
     },
     set: function (hidden) {
