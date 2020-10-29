@@ -1,8 +1,8 @@
 import { capitalize, map } from 'lodash';
 import { MetricAggType } from 'ui/agg_types/metrics/metric_agg_type';
 import { fieldFormats } from 'ui/registry/field_formats';
-import { FormulaParamEditor } from './formula_param_editor.tsx';
-import { FormatterParamEditor } from './formatter_param_editor.tsx';
+  import { FormulaParamEditor } from './formula_param_editor';
+  import { FormatterParamEditor } from './formatter_param_editor';
 import { formatter } from './formatter';
 
 const formatters = map(['number', 'percent', 'boolean', 'bytes', 'numeral'], f => {
