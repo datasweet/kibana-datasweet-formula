@@ -1,8 +1,6 @@
 import React from 'react';
-// import { i18n } from '@kbn/i18n';
 
-function FormulaParamEditor(props) {
-
+function FormulaParamEditor(props: any) {
   const { setValue, value } = props;
 
   /**
@@ -10,7 +8,7 @@ function FormulaParamEditor(props) {
    *
    * @param event
    */
-  const onChange = (event) => {
+  const onChange = (event: any) => {
     setValue(event.target.value);
   };
 
@@ -18,6 +16,7 @@ function FormulaParamEditor(props) {
     <div className="editor-formula">
       <div className="form-group">
         <span className="hintbox-label">
+          {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
           <label>Formula Input</label>
         </span>
         <p>
@@ -25,7 +24,12 @@ function FormulaParamEditor(props) {
         </p>
       </div>
       <div className="vis-editor-agg-editor-advanced-toggle">
-        <a className="kuiLink" href="http://www.datasweet.fr/datasweet-formula/" target="_blank" rel="noopener noreferrer">
+        <a
+          className="kuiLink"
+          href="http://www.datasweet.fr/datasweet-formula/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           Accepted functions
         </a>
       </div>

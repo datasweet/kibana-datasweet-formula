@@ -1,0 +1,8 @@
+{
+  "id": "datasweetFormula",
+  "version": "kibana",
+  "server": false,
+  "ui": true,
+  "requiredPlugins": ["data", "visTypeTable"],
+  "requiredBundles": ["kibanaUtils"]
+}

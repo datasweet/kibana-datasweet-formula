@@ -1,5 +1,4 @@
-import { AggConfigs } from 'ui/agg_types/agg_configs';
-
+import { AggConfigs } from '../../../../src/plugins/data/common';
 
 export function decorateVisAggConfigs() {
   /**
@@ -8,14 +7,14 @@ export function decorateVisAggConfigs() {
    */
   function removeEmptyValues(obj) {
     return Object.keys(obj)
-      .filter(k => obj[k] != null) // Filters out undefined and null objects
+      .filter((k) => obj[k] != null) // Filters out undefined and null objects
       .reduce((newObj, k) => {
         // Recursive call for arrays
         if (Array.isArray(obj[k])) return { ...newObj, [k]: obj[k].map(removeEmptyValues) };
         // Recursive call for objects
-        return typeof obj[k] === 'object' ?
-          { ...newObj, [k]: removeEmptyValues(obj[k]) } :
-          { ...newObj, [k]: obj[k] };
+        return typeof obj[k] === 'object'
+          ? { ...newObj, [k]: removeEmptyValues(obj[k]) }
+          : { ...newObj, [k]: obj[k] };
       }, {});
   }
 
@@ -25,4 +24,4 @@ export function decorateVisAggConfigs() {
     const dsl = toDslFn.apply(this, arguments);
     return isUsingFormula && hierarchical ? removeEmptyValues(dsl) : dsl;
   };
-};
+}

@@ -1,11 +1,10 @@
 import { capitalize, map } from 'lodash';
-import { MetricAggType } from 'ui/agg_types/metrics/metric_agg_type';
-import { fieldFormats } from 'ui/registry/field_formats';
-  import { FormulaParamEditor } from './formula_param_editor';
-  import { FormatterParamEditor } from './formatter_param_editor';
+import { MetricAggType, fieldFormats } from '../../../../src/plugins/data/public';
+import { FormulaParamEditor } from './formula_param_editor';
+import { FormatterParamEditor } from './formatter_param_editor';
 import { formatter } from './formatter';
 
-const formatters = map(['number', 'percent', 'boolean', 'bytes', 'numeral'], f => {
+const formatters = map(['number', 'percent', 'boolean', 'bytes', 'numeral'], (f) => {
   return { id: f, title: capitalize(f) };
 });
 
@@ -14,42 +13,41 @@ export const formulaMetricAgg = new MetricAggType({
   title: 'Datasweet Formula',
   subtype: 'Calculated Metrics',
   hasNoDsl: true,
-  makeLabel: function (aggConfig) {
+  makeLabel(aggConfig) {
     return 'Formula ' + aggConfig.id;
   },
   params: [
     {
       name: 'formula',
-      editorComponent: FormulaParamEditor
+      editorComponent: FormulaParamEditor,
     },
     {
       name: 'formatter',
+      type: 'optioned',
       editorComponent: FormatterParamEditor,
       default: formatter('number'),
-      options: {
-        formatters
-      },
-    }
+      options: formatters,
+    },
   ],
-  getFormat: function (agg) {
+  getSerializedFormat: (agg: any) => {
     const formatterId = agg.params.formatter.id;
     if (!formatterId) {
-      return fieldFormats.getDefaultInstance('number');
+      return fieldFormats.NumberFormat;
     }
 
     if (formatterId === 'numeral') {
-      const format =  agg.params.formatter.params.pattern;
+      const format = agg.params.formatter.params.pattern;
       if (!format) {
-        return fieldFormats.getDefaultInstance('number');
+        return fieldFormats.NumberFormat;
       }
 
-      const FieldFormat = fieldFormats.getType('number');
+      const FieldFormat = fieldFormats.NumberFormat;
       const f = new FieldFormat({ pattern: format });
       return f;
     }
-    return fieldFormats.getInstance(formatterId);
+    return fieldFormats.NumberFormat;
   },
-  getValue: function () {
+  getValue: () => {
     return null;
-  }
+  },
 });

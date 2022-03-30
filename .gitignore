@@ -34,3 +34,9 @@ typings/
 
 # Yarn Integrity file
 .yarn-integrity
+
+# IDE
+.idea
+
+/build
+/target

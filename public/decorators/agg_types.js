@@ -1,7 +1,7 @@
-import { aggTypes } from 'ui/agg_types';
-import { formulaMetricAgg } from 'plugins/datasweet_formula/agg_types/formula';
+import { formulaMetricAgg } from '../agg_types/formula';
+import { getDataSetup } from '../services';
 
 export function decorateAggTypes() {
   formulaMetricAgg.type = 'metrics';
-  aggTypes.metrics.push(formulaMetricAgg);
-};
+  getDataSetup().search.aggs.types.registerMetric(formulaMetricAgg.name, () => formulaMetricAgg);
+}

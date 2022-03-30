@@ -5,7 +5,7 @@ import { find } from 'lodash';
  * This is used when 'Calculate metrics for every bucket/level' option is checked.
  * @param {*} columns
  * @param {boolean} metricsForAllBuckets
-*/
+ */
 export function applyColumnGroups(columns, metricsForAllBuckets) {
   if (!metricsForAllBuckets) return;
 
@@ -14,7 +14,7 @@ export function applyColumnGroups(columns, metricsForAllBuckets) {
   if (!isUsingFormula) return;
 
   let columnGroup = 0;
-  columns = columns.map(c => {
+  columns = columns.map((c) => {
     if (c.aggConfig.type.type === 'buckets') columnGroup++;
     c.columnGroup = columnGroup;
     return c;

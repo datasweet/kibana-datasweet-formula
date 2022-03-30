@@ -1,4 +1,4 @@
-import { each, get, isEmpty } from 'lodash';
+import { each, get, isEmpty, reduce } from 'lodash';
 import { formulaParser } from './formula_parser';
 
 const aggTypeFormulaId = 'datasweet_formula';
@@ -6,7 +6,7 @@ const varPrefix = 'agg';
 const prefixRegExpr = new RegExp(varPrefix, 'g');
 
 function extractSeriesAndFormulas(table, $scope) {
-  const res = { series: {}, formulas:[] };
+  const res = { series: {}, formulas: [] };
 
   each(table.columns, (c, i) => {
     const formattedColumn = $scope.formattedColumns[i];
@@ -29,7 +29,7 @@ function extractSeriesAndFormulas(table, $scope) {
           colIndex,
           key,
           formatter: c.aggConfig.fieldFormatter('text'),
-          compiled: (f.length > 0 ? formulaParser.parse(f) : null)
+          compiled: f.length > 0 ? formulaParser.parse(f) : null,
         });
       }
       res.series[key] = null;
@@ -38,15 +38,19 @@ function extractSeriesAndFormulas(table, $scope) {
     // not an metric
     else if (isEmpty(formattedColumn.total)) {
       res.series[key] = undefined;
-    } 
+    }
 
     // we recompute the total
     else {
       function sum(tableRows) {
-        return _.reduce(tableRows, function (prev, curr) {
-          const v = curr[colId] || 0;
-          return prev + v;
-        }, 0);
+        return reduce(
+          tableRows,
+          function (prev, curr) {
+            const v = curr[colId] || 0;
+            return prev + v;
+          },
+          0
+        );
       }
 
       switch ($scope.totalFunc) {
@@ -67,12 +71,12 @@ function extractSeriesAndFormulas(table, $scope) {
 }
 
 function compute(datas, $scope) {
-  each(datas.formulas, f => {
+  each(datas.formulas, (f) => {
     try {
       const res = f.compiled.evaluate(datas.series);
       datas.series[f.key] = res;
       $scope.formattedColumns[f.colIndex].total = f.formatter(res);
-    }catch (e) {
+    } catch (e) {
       // console.log('ERROR', e);
     }
   });

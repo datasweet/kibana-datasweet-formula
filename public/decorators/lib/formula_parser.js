@@ -1,14 +1,14 @@
 import math from 'expr-eval';
 import { each, isArray, map, isFinite } from 'lodash';
-import { createLegacyClass } from 'ui/utils/legacy_class';
+/*import { createLegacyClass } from 'ui/utils/legacy_class';*/
 import * as formulas from '../../formulas';
 
-createLegacyClass(FormulaParser);
+/*createLegacyClass(FormulaParser);*/
 function FormulaParser() {
   this.parser = new math.Parser({
     operators: {
-      conditional: false
-    }
+      conditional: false,
+    },
   });
 
   const parser = this.parser;
@@ -18,55 +18,55 @@ function FormulaParser() {
     const fn = func;
     parser.unaryOps[funcName] = (x) => {
       if (isArray(x)) {
-        return map(x, r => fn.call(undefined, Number(r)));
+        return map(x, (r) => fn.call(undefined, Number(r)));
       } else {
         return fn.call(undefined, Number(x));
       }
     };
   });
 
-    // Redefine binary operators to work with series.
-    each(parser.binaryOps, (func, funcName) => {
-      let fn = func;
+  // Redefine binary operators to work with series.
+  each(parser.binaryOps, (func, funcName) => {
+    let fn = func;
 
-      if (funcName === '/') {
-        fn = (a, b) => {
-          // Javascript have some weird behaviour concerning division.
-          // - 0/0 => NaN
-          // - x/0 | x <> 0 => -/+Infinity
-          // We want null for both, so they are ignored.
-          // In addition,
-          // - (non finite) / finite should be null
-          // - finite / (non finite)  should be null.
-          const operandsContainsNonFinite = !isFinite(a) || !isFinite(b);
-          if(operandsContainsNonFinite || b === 0) {
-            return null;
-          }
+    if (funcName === '/') {
+      fn = (a, b) => {
+        // Javascript have some weird behaviour concerning division.
+        // - 0/0 => NaN
+        // - x/0 | x <> 0 => -/+Infinity
+        // We want null for both, so they are ignored.
+        // In addition,
+        // - (non finite) / finite should be null
+        // - finite / (non finite)  should be null.
+        const operandsContainsNonFinite = !isFinite(a) || !isFinite(b);
+        if (operandsContainsNonFinite || b === 0) {
+          return null;
+        }
 
-          // Default behaviour.
-          return func.call(undefined, a, b);
-        };
-      }
+        // Default behaviour.
+        return func.call(undefined, a, b);
+      };
+    }
 
-      parser.binaryOps[funcName] = (a, b) => {
-        const ia = isArray(a);
-        const ib = isArray(b);
+    parser.binaryOps[funcName] = (a, b) => {
+      const ia = isArray(a);
+      const ib = isArray(b);
 
       if (ia && ib) {
         const c = new Array();
         const len = Math.max(a.length, b.length);
-        for (var i = 0; i < len; i++) {
+        for (let i = 0; i < len; i++) {
           c.push(fn.call(undefined, a[i] || 0, b[i] || 0));
         }
         return c;
       }
 
       if (ia) {
-        return map(a, r => fn.call(undefined, r, b));
+        return map(a, (r) => fn.call(undefined, r, b));
       }
 
       if (ib) {
-        return map(b, r => fn.call(undefined, a, r));
+        return map(b, (r) => fn.call(undefined, a, r));
       }
 
       return fn.call(undefined, a, b);
@@ -76,7 +76,7 @@ function FormulaParser() {
   // remove default functions
   parser.functions = {};
   this.addDefautFunctions();
-};
+}
 
 FormulaParser.prototype.parse = function (expr) {
   return this.parser.parse(expr);
@@ -93,7 +93,7 @@ FormulaParser.prototype.addFunc = function (func) {
 FormulaParser.prototype.addDefautFunctions = function () {
   const self = this;
   self.parser.functions = {};
-  each(formulas, f => self.addFunc(f));
+  each(formulas, (f) => self.addFunc(f));
 };
 
 export const formulaParser = new FormulaParser();

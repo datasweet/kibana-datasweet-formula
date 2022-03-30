@@ -1,4 +1,4 @@
-import { TabbedAggResponseWriter } from 'ui/agg_response/tabify/_response_writer';
+import { TabbedAggResponseWriter } from '../../../../src/plugins/data/public';
 import { applyColumnGroups } from './lib/apply_column_groups';
 import { applyFormula } from './lib/apply_formula';
 import { applyHiddenCols } from './lib/apply_hidden_cols';
@@ -13,4 +13,4 @@ export function decorateTabbedAggResponseWriter() {
     applyHiddenCols(this.columns, resp);
     return resp;
   };
-};
+}

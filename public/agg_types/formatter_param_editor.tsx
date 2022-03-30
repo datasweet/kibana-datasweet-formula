@@ -1,12 +1,9 @@
 import React, { Fragment } from 'react';
-// import { i18n } from '@kbn/i18n';
 import { formatter } from './formatter';
 
-function FormatterParamEditor(props) {
-
+function FormatterParamEditor(props: any) {
   const { aggParam, setValue, value } = props;
 
-  console.log(value);
   /**
    * Prevent a change to vis editor
    *
@@ -15,7 +12,7 @@ function FormatterParamEditor(props) {
    *  pattern?: string
    * }} [options]
    */
-  const onChange = (id, { pattern }) => {
+  const onChange = (id: string, pattern: any) => {
     setValue(formatter(id, { pattern }));
   };
 
@@ -24,7 +21,7 @@ function FormatterParamEditor(props) {
    *
    * @param event
    */
-  const setFormat = (event) => {
+  const setFormat = (event: any) => {
     onChange(value.id, { pattern: event.target.value });
   };
 
@@ -33,32 +30,39 @@ function FormatterParamEditor(props) {
    *
    * @param event
    */
-  const setFormatter = (event) => {
+  const setFormatter = (event: any) => {
     onChange(event.target.value, value.params);
   };
 
   return (
     <Fragment>
       <div className="form-group">
+        {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
         <label>Formatter</label>
+        {/* eslint-disable-next-line jsx-a11y/no-onchange */}
         <select className="form-control" onChange={setFormatter} value={value.id}>
-          {
-            aggParam.options.formatters.map((formatter) =>
-              <option key={formatter.id} value={formatter.id}>{ formatter.title }</option>
-            )
-          }
+          {aggParam.options.map((f: any) => (
+            <option key={f.id} value={f.id}>
+              {f.title}
+            </option>
+          ))}
         </select>
       </div>
 
-    {
-      value.id === 'numeral' &&
-      <div className="form-group">
+      {value.id === 'numeral' && (
+        <div className="form-group">
+          {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
           <label>Numeral format</label>
           <div>
-            <input type="text" onChange={setFormat} className="form-control" value={value.params.pattern} />
+            <input
+              type="text"
+              onChange={setFormat}
+              className="form-control"
+              value={value.params.pattern}
+            />
           </div>
         </div>
-    }
+      )}
     </Fragment>
   );
 }
