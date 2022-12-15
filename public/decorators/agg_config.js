@@ -5,7 +5,7 @@ export function decorateVisAggConfig() {
   Object.defineProperty(AggConfig.prototype, 'hidden', {
     get: function () {
       if (isBoolean(this.__hidden)) return this.__hidden; // current value
-      return false;
+      else return !this.enabled;
     },
     set: function (hidden) {
       this.__hidden = hidden;
